@@ -3,6 +3,28 @@ using MarkdownAST: MarkdownAST, Node
 import ANSIColoredPrinters
 using Base64: base64decode
 
+"""
+    Markdown()
+
+Documenter output format that emits one Markdown (`.md`) file per source page
+into the `build/` directory, ready to be consumed by a static-site generator
+such as [MkDocs](https://www.mkdocs.org/).
+
+Pass an instance as the `format` keyword to [`Documenter.makedocs`](https://documenter.juliadocs.org/stable/lib/public/#Documenter.makedocs):
+
+```julia
+using Documenter
+using DocumenterMarkdown
+makedocs(sitename = "MyPackage", format = Markdown(), modules = [MyPackage])
+```
+
+The generated markdown uses Pandoc-style `{#anchor}` heading attributes,
+`!!! category "title"` admonitions, `\$...\$` / `\$\$...\$\$` math, and
+`*.md#anchor` cross-references — all of which `mkdocs-material` renders out of
+the box with the `attr_list`, `admonition`, `pymdownx.arithmatex`, and related
+extensions enabled. See the [README](https://github.com/JuliaDocs/DocumenterMarkdown.jl#usage)
+for a complete `mkdocs.yml` example.
+"""
 struct Markdown <: Documenter.Writer
 end
 
